@@ -1,0 +1,15 @@
+services:
+  mcp-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8096:8096"
+    volumes:
+      - ./servers.json:/app/servers.json
+    command:
+      - "--host=0.0.0.0"
+      - "--port=8096"
+      - "--named-server-config=/app/servers.json"
+      - "--allow-origin=*"
